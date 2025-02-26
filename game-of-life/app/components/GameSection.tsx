@@ -133,10 +133,42 @@ const GameSection = () => {
           ))}
         </div>
         <div className="p-4 rounded-lg">
-    <div className="relative flex flex-row bg-inherit gap-3">
-        <label htmlFor="rows">Rows Number: </label><input type="text" id="rows" name="rows" className="peer h-10 w-11 rounded-lg text-white bg-black placeholder-transparent ring-2 px-2 ring-gray-500 focus:ring-yellow-600 focus:outline-none focus:border-rose-600" placeholder="Rows Number" value={rows} onChange={(e) => {setRows(parseInt(e.target.value) || 10); setGrid(createGrid(rows, cols)); StopRunning();}}/>
-        <label htmlFor="columns">Columns Number: </label><input type="text" id="columns" name="columns" className="peer h-10 w-11 rounded-lg text-white bg-black placeholder-transparent ring-2 px-2 ring-gray-500 focus:ring-yellow-600 focus:outline-none focus:border-rose-600" placeholder="Rows Number" value={cols} onChange={(e) => {setCols(parseInt(e.target.value) || 10); setGrid(createGrid(rows, cols)); StopRunning();}}/>
-    </div>
+        <div className="relative flex flex-row bg-inherit gap-3">
+  <label htmlFor="rows">Rows Number: </label>
+  <input
+    type="number"
+    id="rows"
+    name="rows"
+    className="peer h-10 w-14 rounded-lg text-white bg-black placeholder-transparent ring-2 px-2 ring-gray-500 focus:ring-yellow-600 focus:outline-none focus:border-rose-600"
+    placeholder="Rows Number"
+    value={rows}
+    min={1}
+    onChange={(e) => {
+      const value = parseInt(e.target.value) || 1; // Ensure a valid number
+      setRows(value);
+      setGrid(createGrid(value, cols)); // Update grid with new row count
+      setIsRunning(false);
+    }}
+  />
+
+  <label htmlFor="columns">Columns Number: </label>
+  <input
+    type="number"
+    id="columns"
+    name="columns"
+    className="peer h-10 w-14 rounded-lg text-white bg-black placeholder-transparent ring-2 px-2 ring-gray-500 focus:ring-yellow-600 focus:outline-none focus:border-rose-600"
+    placeholder="Columns Number"
+    value={cols}
+    min={1}
+    onChange={(e) => {
+      const value = parseInt(e.target.value) || 1; // Ensure a valid number
+      setCols(value);
+      setGrid(createGrid(rows, value)); // Update grid with new column count
+      setIsRunning(false);
+    }}
+  />
+</div>
+
 
         <label htmlFor="jsonFile">Load Setup: </label><input type="file" accept=".json" id="jsonfile" name="jsonfile" className="peer h-10 w-13 px-2 mt-3 ring-gray-500 focus:ring-yellow-600 focus:outline-none focus:border-rose-600" onChange={(e) => handleFileLoad(e)} />
     
