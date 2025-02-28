@@ -31,7 +31,7 @@ To run the Game of Life after cloning the repository, follow these steps:
     npm run build
     ```
    ```sh
-    npm run start
+   npm run start
     ```
 
 
