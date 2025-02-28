@@ -9,6 +9,7 @@
     "noImplicitAny": false,
     "esModuleInterop": true,
     "module": "esnext",
+    "noUnusedLocals": false,
     "moduleResolution": "bundler",
     "resolveJsonModule": true,
     "isolatedModules": true,

@@ -6,6 +6,7 @@
     color: white;
     font-family: "Press Start 2P", cursive;
     font-size: 3em; 
+    margin-bottom: 20px;
     text-shadow: .03em .03em 0 rgb(255, 208, 0);
     }
 
@@ -34,3 +35,189 @@
     0% {background-position: 0 0}
     0% {background-position: 100% -100%}
     }
+
+  
+/* CSS */
+.btn {
+  position: relative;
+  border: none;
+  background: transparent;
+  padding: 0;
+  cursor: pointer;
+  outline-offset: 2px;
+  transition: filter 250ms;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.btn_shadow {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 6px;
+  background: hsl(0deg 0% 0% / 0.25);
+  will-change: transform;
+  transform: translateY(2px);
+  transition: transform 600ms cubic-bezier(.3, .7, .4, 1);
+}
+
+.btn_edge {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 6px;
+  background: linear-gradient(
+    to left,
+    hsl(120deg 50% 12%) 0%,
+    hsl(120deg 50% 24%) 8%,
+    hsl(120deg 50% 24%) 92%,
+    hsl(120deg 50% 12%) 100%
+  );
+}
+
+.btn_front {
+  display: block;
+  position: relative;
+  padding: 5px 10px;
+  border-radius: 6px;
+  font-size: 1rem;
+  color: white;
+  background: hsl(120deg 100% 20%);
+  will-change: transform;
+  transform: translateY(-4px);
+  transition: transform 600ms cubic-bezier(.3, .7, .4, 1);
+}
+
+@media (min-width: 768px) {
+  .btn_front {
+    font-size: 1.125rem;
+    padding: 8px 22px;
+  }
+}
+
+.btn:hover {
+  filter: brightness(110%);
+  -webkit-filter: brightness(110%);
+}
+
+.btn:hover .btn_front {
+  transform: translateY(-6px);
+  transition: transform 250ms cubic-bezier(.3, .7, .4, 1.5);
+}
+
+.btn:active .btn_front {
+  transform: translateY(-2px);
+  transition: transform 34ms;
+}
+
+.btn:hover .btn_shadow {
+  transform: translateY(4px);
+  transition: transform 250ms cubic-bezier(.3, .7, .4, 1.5);
+}
+
+.btn:active .btn_shadow {
+  transform: translateY(1px);
+  transition: transform 34ms;
+}
+
+.btn:focus:not(:focus-visible) {
+  outline: none;
+}
+
+
+/* CSS */
+.custom_btn {
+  position: relative;
+  border: none;
+  background: transparent;
+  padding: 0;
+  cursor: pointer;
+  outline-offset: 2px;
+  transition: filter 250ms;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.custom_btn_shadow {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 6px;
+  background: hsl(0deg 0% 0% / 0.25);
+  will-change: transform;
+  transform: translateY(2px);
+  transition: transform 600ms cubic-bezier(.3, .7, .4, 1);
+}
+
+.custom_btn_edge {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 6px;
+  background: linear-gradient(
+    to left,
+    hsl(0deg 50% 12%) 0%,
+    hsl(0deg 50% 24%) 8%,
+    hsl(0deg 50% 24%) 92%,
+    hsl(0deg 50% 12%) 100%
+  );
+}
+
+.custom_btn_front {
+  display: block;
+  position: relative;
+  padding: 5px 10px;
+  border-radius: 6px;
+  font-size: 1rem;
+  color: white;
+  background: hsl(0deg 100% 20%);
+  will-change: transform;
+  transform: translateY(-4px);
+  transition: transform 600ms cubic-bezier(.3, .7, .4, 1);
+}
+
+@media (min-width: 768px) {
+  .custom_btn_front {
+    font-size: 1.125rem;
+    padding: 8px 22px;
+  }
+}
+
+.custom_btn:hover {
+  filter: brightness(110%);
+  -webkit-filter: brightness(110%);
+}
+
+.custom_btn:hover .custom_btn_front {
+  transform: translateY(-6px);
+  transition: transform 250ms cubic-bezier(.3, .7, .4, 1.5);
+}
+
+.custom_btn:active .custom_btn_front {
+  transform: translateY(-2px);
+  transition: transform 34ms;
+}
+
+.custom_btn:hover .custom_btn_shadow {
+  transform: translateY(4px);
+  transition: transform 250ms cubic-bezier(.3, .7, .4, 1.5);
+}
+
+.custom_btn:active .custom_btn_shadow {
+  transform: translateY(1px);
+  transition: transform 34ms;
+}
+
+.custom_btn:focus:not(:focus-visible) {
+  outline: none;
+}

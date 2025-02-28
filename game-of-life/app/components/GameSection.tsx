@@ -1,8 +1,9 @@
 'use client'
 import { useState, useEffect } from 'react';
 import styles from './GameSection.module.css';
+
 const createGrid = (rows: number, cols: number) => {
-  return Array.from({ length: rows }, () => Array(cols).fill(0)); // 2D array of Dead cells
+  return Array.from({ length: rows }, () => Array(cols).fill(0));
 };
 
 const GameSection = () => {
@@ -11,10 +12,8 @@ const GameSection = () => {
   const [grid, setGrid] = useState(createGrid(rows, cols)); // The grid itself
   const [isRunning, setIsRunning] = useState(false);
   const [speed, setSpeed] = useState(1000); // Default speed (1 second per generation)
-  const [jsonInput, setJsonInput] = useState(''); // JSON input string
-  const [error, setError] = useState('');
   
-  
+
   const speedLevels = [
     { label: "0.5x", value: 2000 },
     { label: "1x", value: 1000 },
@@ -22,7 +21,7 @@ const GameSection = () => {
     { label: "4x", value: 250 },
   ];
 
- 
+
 
   // Function to calculate the next generation based on the rules
   const nextGeneration = () => {
@@ -65,39 +64,31 @@ const GameSection = () => {
     return () => clearInterval(interval);
   }, [isRunning, grid, speed]);
 
-  
+
   const handleFileLoad = (event) => {
     const file = event.target?.files[0];
     if (!file) return;
-  
+
     const reader = new FileReader();
     reader.onload = (e) => {
       try {
         const json = JSON.parse(e.target?.result as string);
-        setJsonInput(json); // Update state with the loaded JSON
         if (!Array.isArray(json) || !json.every(row => Array.isArray(row))) {
           throw new Error('Invalid JSON format. Must be a 2D array.');
         }
-  
+
         setRows(json.length);
         setCols(json[0].length);
         setGrid(json);
-        setError('');
-      } catch (error) {
+      } catch {
         console.error("Invalid JSON file");
       }
     };
-    
+
     reader.readAsText(file);
-  
+
     // Reset input to allow re-uploading the same file
     event.target.value = "";
-  };
-
-  // Function to clear the grid
-  const StopRunning = () => {
-    setGrid(createGrid(rows, cols));
-    setIsRunning(false);
   };
 
   // Render the grid and the controls
@@ -107,15 +98,23 @@ const GameSection = () => {
 
       {/* Game Controls */}
       <div className="flex gap-3 mb-4">
-        <button className="pixel-btn bg-black text-green-600 text-3xl border-green-600 rounded-lg border-2 p-2" onClick={() => setIsRunning(!isRunning)}>
-          {isRunning ? "Pause" : "Start"}
+        <button className={`pixel-btn bg-black text-green-600 text-3xl border-green-600 rounded-lg border-2 p-2 ${styles.btn}`} onClick={() => setIsRunning(!isRunning)} role="button">
+          <span className={styles.btn_shadow}></span>
+          <span className={styles.btn_edge}></span>
+          <span className={`${styles.btn_front} text`}>
+            {isRunning ? "Pause" : "Start"}
+          </span>
         </button>
-        <button className="pixel-btn bg-black text-red-800 text-3xl corner-button rounded-lg border-red-800 border-2 p-2" onClick={() => {
+
+        <button className={`pixel-btn bg-black text-green-600 text-3xl border-green-600 rounded-lg border-2 p-2 ${styles.custom_btn}`} onClick={() => {
           setGrid(createGrid(rows, cols));
           setIsRunning(false);
-        }
-        }>
-          Stop
+        }} role="button">
+          <span className={styles.custom_btn_shadow}></span>
+          <span className={styles.custom_btn_edge}></span>
+          <span className={`${styles.custom_btn_front} text`}>
+            Stop
+          </span>
         </button>
       </div>
 
@@ -133,46 +132,47 @@ const GameSection = () => {
           ))}
         </div>
         <div className="p-4 rounded-lg">
-        <div className="relative flex flex-row bg-inherit gap-3">
-  <label htmlFor="rows">Rows Number: </label>
-  <input
-    type="number"
-    id="rows"
-    name="rows"
-    className="peer h-10 w-14 rounded-lg text-white bg-black placeholder-transparent ring-2 px-2 ring-gray-500 focus:ring-yellow-600 focus:outline-none focus:border-rose-600"
-    placeholder="Rows Number"
-    value={rows}
-    min={1}
-    onChange={(e) => {
-      const value = parseInt(e.target.value) || 1; // Ensure a valid number
-      setRows(value);
-      setGrid(createGrid(value, cols)); // Update grid with new row count
-      setIsRunning(false);
-    }}
-  />
+          <div className="relative flex flex-row bg-inherit gap-3">
+            <label htmlFor="rows" className='text-xl'>Rows Number: </label>
+            <input
+              type="number"
+              id="rows"
+              name="rows"
+              className="peer h-10 w-14 rounded-lg text-white bg-black placeholder-transparent ring-2 px-2 ring-gray-500 focus:ring-yellow-600 focus:outline-none focus:border-rose-600"
+              placeholder="Rows Number"
+              value={rows}
+              min={1}
+              onChange={(e) => {
+                const value = parseInt(e.target.value) || 1; // Ensure a valid number
+                setRows(value);
+                setGrid(createGrid(value, cols)); // Update grid with new row count
+                setIsRunning(false);
+              }}
+            />
 
-  <label htmlFor="columns">Columns Number: </label>
-  <input
-    type="number"
-    id="columns"
-    name="columns"
-    className="peer h-10 w-14 rounded-lg text-white bg-black placeholder-transparent ring-2 px-2 ring-gray-500 focus:ring-yellow-600 focus:outline-none focus:border-rose-600"
-    placeholder="Columns Number"
-    value={cols}
-    min={1}
-    onChange={(e) => {
-      const value = parseInt(e.target.value) || 1; // Ensure a valid number
-      setCols(value);
-      setGrid(createGrid(rows, value)); // Update grid with new column count
-      setIsRunning(false);
-    }}
-  />
-</div>
+            <label htmlFor="columns" className='text-xl'>Columns Number: </label>
+            <input
+              type="number"
+              id="columns"
+              name="columns"
+              className="peer h-10 w-14 rounded-lg text-white bg-black placeholder-transparent ring-2 px-2 ring-gray-500 focus:ring-yellow-600 focus:outline-none focus:border-rose-600"
+              placeholder="Columns Number"
+              value={cols}
+              min={1}
+              max={60}
+              onChange={(e) => {
+                const value = parseInt(e.target.value) || 1; // Ensure a valid number
+                setCols(value);
+                setGrid(createGrid(rows, value)); // Update grid with new column count
+                setIsRunning(false);
+              }}
+            />
+          </div>
 
 
-        <label htmlFor="jsonFile">Load Setup: </label><input type="file" accept=".json" id="jsonfile" name="jsonfile" className="peer h-10 w-13 px-2 mt-3 ring-gray-500 focus:ring-yellow-600 focus:outline-none focus:border-rose-600" onChange={(e) => handleFileLoad(e)} />
-    
-</div>
+          <label htmlFor="jsonFile" className='text-lg'>Load Setup: </label><input type="file" accept=".json" id="jsonfile" name="jsonfile" className="peer h-10 w-13 px-2 mt-3 ring-gray-500 focus:ring-yellow-600 focus:outline-none focus:border-rose-600" onChange={(e) => handleFileLoad(e)} />
+
+        </div>
       </div>
 
       {/* Grid */}

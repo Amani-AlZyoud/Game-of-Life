@@ -14,6 +14,9 @@
     background-image: url("https://www.transparenttextures.com/patterns/white-diamond-dark.png");
     /* https://upload.wikimedia.org/wikipedia/commons/2/2c/Conway%27s_firework.gif */
     background-repeat: repeat;
+    min-height: 100vh;
+    place-content: center;
+    display: grid;
   }
 }
 
