@@ -16,7 +16,7 @@ To run the Game of Life after cloning the repository, follow these steps:
 
 1. **Clone the repository:**
     ```sh
-    git clone https://github.com/yourusername/game-of-life.git
+    git clone https://github.com/Amani-AlZyoud/Game-of-Life
     cd game-of-life
     ```
 
@@ -25,22 +25,27 @@ To run the Game of Life after cloning the repository, follow these steps:
     ```sh
     npm install
     ```
-    or
-    ```sh
-    pip install -r requirements.txt
-    ```
-    depending on the language and package manager used.
 
-3. **Run the application:**
-    Execute the main script to start the Game of Life. For example:
+3. **Run the website:**
     ```sh
-    npm start
+    npm run build
     ```
-    or
-    ```sh
-    python main.py
+   ```sh
+    npm run start
     ```
 
-4. **Enjoy the simulation!**
 
-Feel free to explore and modify the code to experiment with different initial configurations and rules.
+
+## Play the Game
+
+Experience Conway's Game of Life in action by visiting our live demo:
+
+[![Play Conway's Game of Life](https://img.shields.io/badge/Play-Conway's_Game_of_Life-brightgreen)](https://con-way-game-of-life.netlify.app/)
+
+**Enjoy the Game! ^_^** 
+
+
+<p align="center">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/2/2c/Conway%27s_firework.gif" alt="Conway's Game of Life">
+</p>
+
